@@ -1,0 +1,21 @@
+{
+    "name": "fabrizio/appsalon",
+    "description": "Proyecto de una aplicacion para peluqueria con php, mysql, sass y gulp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Model\\": "./models",
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Classes\\": "./classes"
+        }
+    },
+    "authors": [{
+        "name": "Fabrizio Dev",
+        "email": "hola@fabriziodev.ar"
+    }],
+    "require": {
+        "phpmailer/phpmailer": "^6.7",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

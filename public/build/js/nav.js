@@ -1,0 +1,1 @@
+function navActive(){const c=document.querySelectorAll(".barra-servicios a"),o=window.location.href;console.log(o),c.forEach(c=>{c.href==o&&c.classList.add("active")})}navActive();

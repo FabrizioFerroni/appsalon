@@ -1,0 +1,57 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+.alerta {
+    // border-radius: .8rem;
+    color: v.$blanco;
+    padding: calc(v.$separacion / 4);
+    border-radius: .8rem;
+    // padding: .5rem 2rem;
+    text-align: center;
+    // text-transform: uppercase;
+    margin: 1rem 0;
+    font-weight: v.$bold;
+    display: flex;
+    justify-content: space-between;
+    cursor: default;
+    &.error {
+        background-color: v.$rojo;
+        &:hover {
+            background-color: darken(v.$rojo, 10);
+        }
+    }
+    &.exito {
+        align-items: center;
+        background-color: v.$verde;
+    }
+    span {
+        cursor: pointer;
+        &::selection {
+            display: none;
+        }
+        &:hover {
+            color: v.$grisOscuro;
+        }
+    }
+}
+
+.alerta2 {
+    display: block;
+    color: v.$blanco;
+    padding: calc(v.$separacion / 4);
+    border-radius: .8rem;
+    // padding: .5rem 2rem;
+    text-align: center;
+    // text-transform: uppercase;
+    margin: 1rem 0;
+    font-weight: v.$bold;
+    &.error {
+        background-color: v.$rojo;
+        &:hover {
+            background-color: darken(v.$rojo, 10);
+        }
+    }
+    &.exito {
+        align-items: center;
+        background-color: v.$verde;
+    }
+}
