@@ -103,9 +103,18 @@ async function consultarApi() {
     try {
         const URLdomain = window.location.origin;
         const url = `${URLdomain}/api/servicios`;
-        const resultado = await fetch(url);
-        const servicios = await resultado.json();
-        mostrarServicios(servicios);
+        // console.log(url);
+        // const resultado = await fetch(url);
+        // const servicios = await resultado.json();
+        // mostrarServicios(servicios);
+        await fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                mostrarServicios(data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     } catch (error) {
         console.log(error);
     }
@@ -328,7 +337,8 @@ async function reservarTurno() {
         const fechaFormateada = fechaUTC.toLocaleDateString("es-AR", opciones);
 
         if (resultado.resultado) {
-            swal.fire({
+            swal
+                .fire({
                     title: `Gracias ${nombre} 😁`,
                     text: `Has reservado con éxito tu turno para el dia ${fechaFormateada} a las ${hora} horas.`,
                     icon: "success",
@@ -345,7 +355,8 @@ async function reservarTurno() {
                     }
                 });
         } else {
-            swal.fire({
+            swal
+                .fire({
                     title: `Upps... hubo un error 😣`,
                     text: `Lamentamos que esto haya pasado, trata de volver a intentarlo.`,
                     icon: "error",
@@ -363,7 +374,8 @@ async function reservarTurno() {
                 });
         }
     } catch (error) {
-        swal.fire({
+        swal
+            .fire({
                 title: `Upps... hubo un error 😢`,
                 text: `No hemos podido procesar tu solicitud para guardar tu turno.`,
                 icon: "error",
@@ -380,7 +392,6 @@ async function reservarTurno() {
                 }
             });
     }
-
 }
 
 function mostrarAlerta(mensaje, tipo, elemento, desaparece) {

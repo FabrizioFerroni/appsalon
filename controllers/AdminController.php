@@ -32,10 +32,10 @@ class AdminController
         $consulta .= " FROM citas AS c ";
         $consulta .= " LEFT OUTER JOIN usuarios AS u ";
         $consulta .= " ON c.usuarioId = u.id  ";
-        $consulta .= " LEFT OUTER JOIN citasServicios AS cs";
-        $consulta .= " ON CS.citaId = c.id ";
+        $consulta .= " LEFT OUTER JOIN citasservicios AS cs";
+        $consulta .= " ON cs.citaId = c.id ";
         $consulta .= " LEFT OUTER JOIN servicios AS s ";
-        $consulta .= " ON S.id = cs.servicioId ";
+        $consulta .= " ON s.id = cs.servicioId ";
         $consulta .= " WHERE fecha =  '${fecha}' ";
 
         $citas = AdminCita::SQL($consulta);

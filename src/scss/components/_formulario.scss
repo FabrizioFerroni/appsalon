@@ -9,11 +9,21 @@
     display: flex;
     margin-bottom: 2rem;
     align-items: center;
+    flex-direction: column;
+    @include m.tablet {
+        flex-direction: row;
+    }
     label {
-        flex: 0 0 15rem;
+        flex: 0 0 3rem;
+        @include m.tablet {
+            flex: 0 0 15rem;
+        }
     }
     input {
-        flex: 1;
+        width: 100%;
+        @include m.tablet {
+            flex: 1;
+        }
         border: 1px solid v.$negro;
         padding: calc(v.$separacion / 4);
         border-radius: 1rem;

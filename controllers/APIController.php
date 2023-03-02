@@ -2,16 +2,13 @@
 
 namespace Controllers;
 
-use Classes\Email;
 use Model\Cita;
 use Model\CitaServicio;
 use Model\Servicio;
-use Model\Usuario;
-use MVC\Router;
 
 class APIController
 {
-    public static function Index(Router $router)
+    public static function Index()
     {
         $servicios = Servicio::all();
         echo json_encode($servicios);

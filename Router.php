@@ -4,50 +4,56 @@ namespace MVC;
 
 class Router
 {
+    public array $getRoutes = [];
+    public array $postRoutes = [];
 
-
-
-    public $rutasGET = [];
-    public $rutasPOST = [];
-
-    public function get($url, $fn, $id = null)
-    {
-        $this->rutasGET[$url] = $fn;
+    public function get($url, $fn) {
+        $this->getRoutes[$url] = $fn;
     }
 
-    public function post($url, $fn)
-    {
-        $this->rutasPOST[$url] = $fn;
+    public function post($url, $fn) {
+        $this->postRoutes[$url] = $fn;
     }
 
-    public function comprobarRutas()
-    {
-        $urlActual = $_SERVER['REQUEST_URI'] === '' ?  '/' : $_SERVER['REQUEST_URI'];
-        $metodo = $_SERVER['REQUEST_METHOD'];
-        if ($metodo === 'GET') {
-            $fn = $this->rutasGET[$urlActual] ?? null;
+    public function comprobarRutas() {
+        // $currentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' :  $_SERVER['REQUEST_URI'] ;
+        // $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        // debug($_SERVER);
+
+        if (isset($_SERVER['PATH_INFO'])) {
+            $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
         } else {
-            $fn = $this->rutasPOST[$urlActual] ?? null;
+            $currentUrl = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'];
         }
-
-        if ($fn) {
-            // La url existe y si tiene una funcion asociada.
-            call_user_func($fn, $this);
+        
+        $method = $_SERVER['REQUEST_METHOD'];
+        // debug();
+        if ($method === 'GET') {
+            $fn = $this->getRoutes[$currentUrl] ?? null;
         } else {
-            echo "Pagina no encontrada o ruta no válida";
+            $fn = $this->postRoutes[$currentUrl] ?? null;
+        }
+        // debug($this->getRoutes);
+        if ( $fn ) {
+            // Call user fn va a llamar una función cuando no sabemos cual sera
+            call_user_func($fn, $this); // This es para pasar argumentos
+        } else {
+            echo "Página No Encontrada o Ruta no válida";
         }
     }
 
-    public function render($view, $datos = [], $titulo = "App Salón")
-    {
-        foreach ($datos as $k => $v) {
-            $$k = $v;
+    public function render($view, $datos = [], $titulo = 'App Salon') {
+        // Leer lo que le pasamos  a la vista
+        foreach ($datos as $key => $value) {
+            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla a otra no la reescribe, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
         }
 
-        ob_start();
-        include __DIR__ . "/views/$view.php";
-        $contenido = ob_get_clean();
+        ob_start(); // Almacenamiento en memoria durante un momento...
 
-        include __DIR__ . "/views/layout.php";
+        // entonces incluimos la vista en el layout
+        include_once __DIR__ . "/views/$view.php";
+        $contenido = ob_get_clean(); // Limpia el Buffer
+        include_once __DIR__ . '/views/layout.php';
     }
 }
+

@@ -1,4 +1,5 @@
 @use 'base/variables' as v;
+@use 'base/mixins' as m;
 .citas {
     list-style: none;
     padding: 0;
@@ -37,6 +38,14 @@
     }
     .boton,
     .boton-eliminar {
-        margin: 0;
+        @include m.tablet {
+            margin: 0;
+        }
+    }
+    .boton {
+        margin-bottom: 1.5rem;
+    }
+    .boton-eliminar {
+        border-radius: 1rem;
     }
 }
